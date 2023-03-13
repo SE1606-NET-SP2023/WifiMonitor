@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using ManagedNativeWifi;
 
 namespace WifiMonitor
 {
@@ -20,9 +10,103 @@ namespace WifiMonitor
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        private int min = 0, max = 0;
+
         public MainWindow()
         {
             InitializeComponent();
+            lv.ItemsSource = GetAllAvailableWifi();
         }
+
+
+
+        public static List<WifiInformation> GetAllAvailableWifi()
+        {
+            List<WifiInformation> wifiList = new List<WifiInformation>();
+            IEnumerable<AvailableNetworkGroupPack> networkList = NativeWifi.EnumerateAvailableNetworkGroups();
+
+            foreach (AvailableNetworkGroupPack network in networkList)
+            {
+                BssNetworkPack networkPack = network.BssNetworks.ToList()[0];
+
+                wifiList.Add(new WifiInformation
+                {
+                    SSID = networkPack.Ssid.ToString(),
+                    BSSID = networkPack.Bssid.ToString(),
+                    Signal = networkPack.SignalStrength.ToString(),
+                    Band = networkPack.Band.ToString(),
+                    Channel = networkPack.Channel.ToString(),
+                    Security = network.AuthenticationAlgorithm.ToString().Replace("RSNA", "WPA2")
+                });
+            }
+            return wifiList;
+        }
+
+        public List<WifiInformation> GetAllWifi()
+        {
+            List<WifiInformation> wifiList = new List<WifiInformation>();
+            IEnumerable<BssNetworkPack> networkList = NativeWifi.EnumerateBssNetworks();
+            IEnumerable<AvailableNetworkGroupPack> network1 = NativeWifi.EnumerateAvailableNetworkGroups();
+
+            foreach (BssNetworkPack network in networkList)
+            {
+
+
+                int signalStrength = network.SignalStrength;
+
+                if (signalStrength > max)
+                {
+                    max = signalStrength;
+                }
+
+                if (signalStrength < min)
+                {
+                    min = signalStrength;
+                }
+
+                int average = (min + max) / 2;
+
+
+                wifiList.Add(new WifiInformation
+                {
+                    SSID = network.Ssid.ToString(),
+                    BSSID = network.Bssid.ToString(),
+                    Signal = signalStrength.ToString(),
+                    Min = "",
+                    Max = "",
+                    Average = "",
+                    Band = network.Band.ToString(),
+                    Channel = network.Channel.ToString(),
+                    Security = (network as object as AvailableNetworkGroupPack).AuthenticationAlgorithm.ToString().Replace("RSNA", "WPA2"),
+                });
+            }
+            return wifiList;
+        }
+
+
+
+        private void lv_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
+        }
+
+    }
+
+    public class WifiInformation
+    {
+        public string? SSID { get; set; }
+        public string? BSSID { get; set; }
+        public string? Signal { get; set; }
+        public string? Percentage { get; set; }
+        public string? Min { get; set; }
+        public string? Max { get; set; }
+        public string? Average { get; set; }
+        public string? Level { get; set; }
+        public string? Band { get; set; }
+        public string? Channel { get; set; }
+        public string? Width { get; set; }
+        public string? Security { get; set; }
+        public string? Mode { get; set; }
     }
 }

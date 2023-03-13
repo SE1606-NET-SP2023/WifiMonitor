@@ -7,6 +7,33 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <ListView x:Name="lv" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,49,0,0" SelectionChanged="lv_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="SSID"  Width="120" DisplayMemberBinding="{Binding SSID}"/>
+                    <GridViewColumn Header="BSSID"  Width="120" DisplayMemberBinding="{Binding BSSID}"/>
+                    <GridViewColumn Header="Signal" Width="40" DisplayMemberBinding="{Binding Signal}"/>
+                    <GridViewColumn Header="%"  Width="40" DisplayMemberBinding="{Binding Percentage}"/>
+                    <GridViewColumn Header="Min."  Width="40" DisplayMemberBinding="{Binding Min}"/>
+                    <GridViewColumn Header="Max."  Width="40" DisplayMemberBinding="{Binding Max}"/>
+                    <GridViewColumn Header="Average"  Width="50" DisplayMemberBinding="{Binding Average}"/>
+                    <GridViewColumn Header="Level"  >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ProgressBar x:Name="TaskBar" Maximum="100" Value="50"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+
+                    <GridViewColumn Header="Band"  Width="40" DisplayMemberBinding="{Binding Band}"/>
+                    <GridViewColumn Header="Channel"  Width="55" DisplayMemberBinding="{Binding Channel}"/>
+                    <GridViewColumn Header="Width"  Width="50" DisplayMemberBinding="{Binding Width}"/>
+                    <GridViewColumn Header="Security" DisplayMemberBinding="{Binding Security}"/>
+                    <GridViewColumn Header="Mode" Width="40" DisplayMemberBinding="{Binding Mode}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
     </Grid>
 </Window>
