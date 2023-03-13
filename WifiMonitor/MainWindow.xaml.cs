@@ -37,7 +37,8 @@ namespace WifiMonitor
                     Signal = networkPack.SignalStrength.ToString(),
                     Band = networkPack.Band.ToString(),
                     Channel = networkPack.Channel.ToString(),
-                    Security = network.AuthenticationAlgorithm.ToString().Replace("RSNA", "WPA2")
+                    Security = network.AuthenticationAlgorithm.ToString().Replace("RSNA", "WPA2"),
+                    Mode = network.PhyType.ToProtocolName().ToString()
                 });
             }
             return wifiList;
