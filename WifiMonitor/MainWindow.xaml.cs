@@ -43,46 +43,6 @@ namespace WifiMonitor
             return wifiList;
         }
 
-        public List<WifiInformation> GetAllWifi()
-        {
-            List<WifiInformation> wifiList = new List<WifiInformation>();
-            IEnumerable<BssNetworkPack> networkList = NativeWifi.EnumerateBssNetworks();
-            IEnumerable<AvailableNetworkGroupPack> network1 = NativeWifi.EnumerateAvailableNetworkGroups();
-
-            foreach (BssNetworkPack network in networkList)
-            {
-
-
-                int signalStrength = network.SignalStrength;
-
-                if (signalStrength > max)
-                {
-                    max = signalStrength;
-                }
-
-                if (signalStrength < min)
-                {
-                    min = signalStrength;
-                }
-
-                int average = (min + max) / 2;
-
-
-                wifiList.Add(new WifiInformation
-                {
-                    SSID = network.Ssid.ToString(),
-                    BSSID = network.Bssid.ToString(),
-                    Signal = signalStrength.ToString(),
-                    Min = "",
-                    Max = "",
-                    Average = "",
-                    Band = network.Band.ToString(),
-                    Channel = network.Channel.ToString(),
-                    Security = (network as object as AvailableNetworkGroupPack).AuthenticationAlgorithm.ToString().Replace("RSNA", "WPA2"),
-                });
-            }
-            return wifiList;
-        }
 
 
 
