@@ -1,15 +1,16 @@
-﻿using ManagedNativeWifi;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ManagedNativeWifi;
 using WifiMonitor.Models;
 
 namespace WifiMonitor.ViewModels
 {
     class WifiMonitorHelper
     {
+        public static List<WifiInformation> list = GetAllAvailableWifi();
+
+
+
         public static List<WifiInformation> GetAllAvailableWifi()
         {
             List<WifiInformation> wifiList = new List<WifiInformation>();

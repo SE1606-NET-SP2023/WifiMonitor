@@ -13,7 +13,9 @@
                     <GridViewColumn Width="40" >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox  Checked="CheckBox_Checked"/>
+                                <CheckBox  Checked="CheckBox_Checked" Background="{Binding Color}">
+                                    <TextBlock  Text="{Binding BSSID }" Visibility="Hidden" />
+                                </CheckBox>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

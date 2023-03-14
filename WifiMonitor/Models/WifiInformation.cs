@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WifiMonitor.Models
+﻿namespace WifiMonitor.Models
 {
     public class WifiInformation
     {
@@ -21,5 +15,6 @@ namespace WifiMonitor.Models
         public string? Width { get; set; }
         public string? Security { get; set; }
         public string? Mode { get; set; }
+        public string? Color { get; set; }
     }
 }
