@@ -10,6 +10,13 @@
         <ListView x:Name="lv" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,49,0,0" SelectionChanged="lv_SelectionChanged">
             <ListView.View>
                 <GridView>
+                    <GridViewColumn Width="40" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox  Checked="CheckBox_Checked"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn Header="SSID"  Width="120" DisplayMemberBinding="{Binding SSID}"/>
                     <GridViewColumn Header="BSSID"  Width="120" DisplayMemberBinding="{Binding BSSID}"/>
                     <GridViewColumn Header="Signal" Width="40" DisplayMemberBinding="{Binding Signal}"/>
