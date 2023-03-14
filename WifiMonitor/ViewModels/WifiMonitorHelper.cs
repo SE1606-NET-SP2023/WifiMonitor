@@ -31,7 +31,7 @@ namespace WifiMonitor.ViewModels
                     Mode = network.PhyType.ToProtocolName().ToString()
                 });
             }
-            return wifiList;
+            return wifiList.DistinctBy(x => x.BSSID).ToList();
         }
     }
 }
