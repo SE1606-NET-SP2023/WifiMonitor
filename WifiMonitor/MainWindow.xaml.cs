@@ -44,8 +44,10 @@ namespace WifiMonitor
             return wifiList;
         }
 
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
 
-
+        }
 
         private void lv_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
