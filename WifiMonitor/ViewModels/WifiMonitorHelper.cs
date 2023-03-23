@@ -5,12 +5,8 @@ using WifiMonitor.Models;
 
 namespace WifiMonitor.ViewModels
 {
-    class WifiMonitorHelper
+    public class WifiMonitorHelper
     {
-        public static List<WifiInformation> list = GetAllAvailableWifi();
-
-
-
         public static List<WifiInformation> GetAllAvailableWifi()
         {
             List<WifiInformation> wifiList = new List<WifiInformation>();
@@ -19,7 +15,6 @@ namespace WifiMonitor.ViewModels
             foreach (AvailableNetworkGroupPack network in networkList)
             {
                 BssNetworkPack networkPack = network.BssNetworks.ToList()[0];
-
                 wifiList.Add(new WifiInformation
                 {
                     SSID = networkPack.Ssid.ToString(),

@@ -5,6 +5,8 @@ using System.Windows;
 using System.Windows.Controls;
 using WifiMonitor.Models;
 using WifiMonitor.ViewModels;
+using WifiMonitor.Utils;
+using System.Windows.Threading;
 
 namespace WifiMonitor
 {
@@ -13,13 +15,35 @@ namespace WifiMonitor
     /// </summary>
     public partial class MainWindow : Window
     {
+        public delegate void ActionNotify();
+        public event ActionNotify? OnNotify;
         private int min = 0, max = 0;
         private Random random = new Random();
+        AccessPointUtils utils = new AccessPointUtils();
 
         public MainWindow()
         {
             InitializeComponent();
-            lv.ItemsSource = WifiMonitorHelper.list;
+            lv.ItemsSource = AccessPointUtils.AvailableWifi;
+            utils.OnScanSuccess += UpdateData;
+        }
+
+        public MainWindow(AccessPointUtils au)
+        {
+            au.OnScanSuccess += UpdateData;
+        }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            DispatcherTimer ScanTimer = new DispatcherTimer();
+            ScanTimer.Tick += new EventHandler(DoScan);
+            ScanTimer.Interval = new TimeSpan(0, 0, 5);
+            ScanTimer.Start();
+        }
+
+        void DoScan(object sender, EventArgs e)
+        {
+            //OnNotify.Invoke();
+            utils.Scan();
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
@@ -31,17 +55,23 @@ namespace WifiMonitor
             string currentBSSID = (currentCheckbox.Content as TextBlock)!.Text;
 
 
-            WifiInformation selectedWifi = WifiMonitorHelper.list.Where(x => x.BSSID!.Equals(currentBSSID)).FirstOrDefault()!;
+            WifiInformation selectedWifi = AccessPointUtils.AvailableWifi.Where(x => x.BSSID!.Equals(currentBSSID)).FirstOrDefault()!;
 
             selectedWifi.Color = "#" + randomColor.R.ToString("X2") + randomColor.G.ToString("X2") + randomColor.B.ToString("X2");
 
             lv.ItemsSource = null;
-            lv.ItemsSource = WifiMonitorHelper.list;
+            lv.ItemsSource = AccessPointUtils.AvailableWifi;
         }
 
         private void lv_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
 
+        }
+
+        void UpdateData()
+        {
+            lv.ItemsSource = null;
+            lv.ItemsSource = AccessPointUtils.AvailableWifi;
         }
 
     }
