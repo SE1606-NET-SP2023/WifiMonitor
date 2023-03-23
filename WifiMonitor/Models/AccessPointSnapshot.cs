@@ -11,7 +11,6 @@ namespace WifiMonitor.Models
         public string? SSID { get; set; }
         public string? BSSID { get; set; }
         public string? Signal { get; set; }
-        public string? Percentage { get; set; }
         public string? Band { get; set; }
         public string? Channel { get; set; }
         public string? Width { get; set; }
