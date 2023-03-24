@@ -7,6 +7,9 @@ using WifiMonitor.Models;
 using WifiMonitor.ViewModels;
 using WifiMonitor.Utils;
 using System.Windows.Threading;
+using WifiMonitor.Views;
+using System.ComponentModel;
+using System.Reflection;
 
 namespace WifiMonitor
 {
@@ -26,13 +29,9 @@ namespace WifiMonitor
         {
             InitializeComponent();
             lv.ItemsSource = AccessPointUtils.AvailableWifi;
-            utils.OnScanSuccess += UpdateData;
+            AccessPointUtils.OnScanSuccess += UpdateData;
         }
 
-        public MainWindow(AccessPointUtils au)
-        {
-            au.OnScanSuccess += UpdateData;
-        }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             ScanTimer.Tick += new EventHandler(DoScan);
@@ -52,34 +51,19 @@ namespace WifiMonitor
             //OnNotify.Invoke();
             utils.Scan();
         }
+        private void BtnDetail_Click(object sender, RoutedEventArgs e)
+        {
+            Window container = new Window();
+            TabularData1 ta = new TabularData1();
 
-        //private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        //{
-        //    Color randomColor = Color.FromArgb(random.Next(256), random.Next(256), random.Next(256));
-
-
-        //    CheckBox currentCheckbox = (sender as CheckBox)!;
-        //    string currentBSSID = (currentCheckbox.Content as TextBlock)!.Text;
-
-
-        //    WifiInformation selectedWifi = AccessPointUtils.AvailableWifi.Where(x => x.BSSID!.Equals(currentBSSID)).FirstOrDefault()!;
-
-        //    selectedWifi.Color = "#" + randomColor.R.ToString("X2") + randomColor.G.ToString("X2") + randomColor.B.ToString("X2");
-
-        //    lv.ItemsSource = null;
-        //    lv.ItemsSource = AccessPointUtils.AvailableWifi;
-        //}
-
-        //private void lv_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        //{
-
-        //}
+            container.Content = ta;
+            container.Show();
+        }
 
         void UpdateData()
         {
             lv.ItemsSource = null;
             lv.ItemsSource = AccessPointUtils.AvailableWifi;
         }
-
     }
 }

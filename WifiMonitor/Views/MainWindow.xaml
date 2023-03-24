@@ -5,11 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WifiMonitor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="922"
-        HorizontalAlignment="Stretch"
-        Loaded="Window_Loaded">
-    <Grid HorizontalAlignment="Stretch">
-        <ListView x:Name="lv" d:ItemsSource="{d:SampleData ItemCount=1}" Margin="0,49,0,0" HorizontalAlignment="Stretch">
+        Title="MainWindow" Height="450" Width="922" Loaded="Window_Loaded">
+    <Grid>
+        <ListView x:Name="lv" Margin="0,49,0,0" RenderTransformOrigin="0.506,0.533">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="30" >
@@ -44,7 +42,9 @@
                     <GridViewColumn Header="Mode" Width="40" DisplayMemberBinding="{Binding Mode}"/>
                 </GridView>
             </ListView.View>
+
         </ListView>
+        <Button x:Name="BtnDetail" Content="Button" HorizontalAlignment="Left" Margin="95,4,0,0" VerticalAlignment="Top" Height="25" Width="75" RenderTransformOrigin="0.667,1.802" Click="BtnDetail_Click"/>
 
         <ComboBox x:Name="cbInterval" SelectionChanged="cbInterval_OnChange"
                   HorizontalAlignment="Left" Margin="670,10,0,0" VerticalAlignment="Top" Width="120">
