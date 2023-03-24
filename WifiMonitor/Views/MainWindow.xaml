@@ -7,7 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <ListView x:Name="lv" Margin="0,49,0,0" SelectionChanged="lv_SelectionChanged" RenderTransformOrigin="0.506,0.533">
+        <ListView x:Name="lv" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,49,0,0" >
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <EventSetter Event="MouseDoubleClick"  Handler="ListViewItem_MouseDoubleClick"/>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="40" >
@@ -42,9 +47,7 @@
                     <GridViewColumn Header="Mode" Width="40" DisplayMemberBinding="{Binding Mode}"/>
                 </GridView>
             </ListView.View>
-
         </ListView>
-        <Button x:Name="BtnDetail" Content="Button" HorizontalAlignment="Left" Margin="95,4,0,0" VerticalAlignment="Top" Height="25" Width="75" RenderTransformOrigin="0.667,1.802" Click="BtnDetail_Click"/>
 
     </Grid>
 </Window>

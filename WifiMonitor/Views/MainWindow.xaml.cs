@@ -3,16 +3,10 @@ using System.Drawing;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using WifiMonitor.Models;
 using WifiMonitor.ViewModels;
-<<<<<<< Updated upstream
-=======
-using WifiMonitor.Utils;
-using System.Windows.Threading;
 using WifiMonitor.Views;
-using System.ComponentModel;
-using System.Reflection;
->>>>>>> Stashed changes
 
 namespace WifiMonitor
 {
@@ -47,28 +41,12 @@ namespace WifiMonitor
             lv.ItemsSource = WifiMonitorHelper.list;
         }
 
-        private void lv_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            WifiInformation wi = (WifiInformation)lv.SelectedItem;
+            var window = new MyWifi();
+            
         }
 
-<<<<<<< Updated upstream
-=======
-        private void BtnDetail_Click(object sender, RoutedEventArgs e)
-        {
-            Window container = new Window();
-            TabularData1 ta = new TabularData1();
-
-            container.Content = ta;
-            container.Show();
-        }
-
-        void UpdateData()
-        {
-            lv.ItemsSource = null;
-            lv.ItemsSource = AccessPointUtils.AvailableWifi;
-        }
-
->>>>>>> Stashed changes
     }
 }

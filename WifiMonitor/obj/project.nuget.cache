@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "4ZRbPwhSGcbQGV/D5+PE51rf4DjD8C4U9SDFJXfQuPrcRaJ46MAZt6hnpLu4bLlL6LOZqOJ9Un4V2FpdB9eoQQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\admin\\Documents\\Evanie\\Code\\PRN221\\WifiMonitor\\WifiMonitor\\WifiMonitor.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\admin\\.nuget\\packages\\managednativewifi\\2.5.0\\managednativewifi.2.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
