@@ -5,7 +5,7 @@ using WifiMonitor.Models;
 
 namespace WifiMonitor.ViewModels
 {
-    public class WifiMonitorHelper
+    public class WifiVM
     {
         public static List<WifiInformation> GetAllAvailableWifi()
         {

@@ -26,9 +26,9 @@ namespace WifiMonitor.Utils
 
         public void Scan()
         {
-            if (WifiMonitorHelper.GetAllAvailableWifi().Count != 0)
+            if (WifiVM.GetAllAvailableWifi().Count != 0)
             {
-                AvailableWifi = WifiMonitorHelper.GetAllAvailableWifi();
+                AvailableWifi = WifiVM.GetAllAvailableWifi();
                 UpdateScanHistory();
                 OnScanSuccess?.Invoke();
             }
