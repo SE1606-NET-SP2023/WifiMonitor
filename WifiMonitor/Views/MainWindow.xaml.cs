@@ -26,13 +26,9 @@ namespace WifiMonitor
         {
             InitializeComponent();
             lv.ItemsSource = AccessPointUtils.AvailableWifi;
-            utils.OnScanSuccess += UpdateData;
+            AccessPointUtils.OnScanSuccess += UpdateData;
         }
-
-        public MainWindow(AccessPointUtils au)
-        {
-            au.OnScanSuccess += UpdateData;
-        }
+        
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             ScanTimer.Tick += new EventHandler(DoScan);
