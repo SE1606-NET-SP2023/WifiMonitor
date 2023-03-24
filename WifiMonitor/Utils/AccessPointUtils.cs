@@ -11,7 +11,7 @@ namespace WifiMonitor.Utils
     public class AccessPointUtils
     {
         public delegate void ScanNotify();
-        public event ScanNotify? OnScanSuccess;
+        public static event ScanNotify? OnScanSuccess;
 
         public static List<WifiInformation> AvailableWifi = new List<WifiInformation>();
         public static List<AccessPointSnapshot> ScanHistory = new List<AccessPointSnapshot>();

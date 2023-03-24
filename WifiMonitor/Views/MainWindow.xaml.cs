@@ -26,13 +26,9 @@ namespace WifiMonitor
         {
             InitializeComponent();
             lv.ItemsSource = AccessPointUtils.AvailableWifi;
-            utils.OnScanSuccess += UpdateData;
+            AccessPointUtils.OnScanSuccess += UpdateData;
         }
 
-        public MainWindow(AccessPointUtils au)
-        {
-            au.OnScanSuccess += UpdateData;
-        }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             ScanTimer.Tick += new EventHandler(DoScan);
@@ -52,28 +48,6 @@ namespace WifiMonitor
             //OnNotify.Invoke();
             utils.Scan();
         }
-
-        //private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        //{
-        //    Color randomColor = Color.FromArgb(random.Next(256), random.Next(256), random.Next(256));
-
-
-        //    CheckBox currentCheckbox = (sender as CheckBox)!;
-        //    string currentBSSID = (currentCheckbox.Content as TextBlock)!.Text;
-
-
-        //    WifiInformation selectedWifi = AccessPointUtils.AvailableWifi.Where(x => x.BSSID!.Equals(currentBSSID)).FirstOrDefault()!;
-
-        //    selectedWifi.Color = "#" + randomColor.R.ToString("X2") + randomColor.G.ToString("X2") + randomColor.B.ToString("X2");
-
-        //    lv.ItemsSource = null;
-        //    lv.ItemsSource = AccessPointUtils.AvailableWifi;
-        //}
-
-        //private void lv_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        //{
-
-        //}
 
         void UpdateData()
         {
