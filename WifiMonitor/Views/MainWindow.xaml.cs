@@ -5,6 +5,14 @@ using System.Windows;
 using System.Windows.Controls;
 using WifiMonitor.Models;
 using WifiMonitor.ViewModels;
+<<<<<<< Updated upstream
+=======
+using WifiMonitor.Utils;
+using System.Windows.Threading;
+using WifiMonitor.Views;
+using System.ComponentModel;
+using System.Reflection;
+>>>>>>> Stashed changes
 
 namespace WifiMonitor
 {
@@ -44,5 +52,23 @@ namespace WifiMonitor
 
         }
 
+<<<<<<< Updated upstream
+=======
+        private void BtnDetail_Click(object sender, RoutedEventArgs e)
+        {
+            Window container = new Window();
+            TabularData1 ta = new TabularData1();
+
+            container.Content = ta;
+            container.Show();
+        }
+
+        void UpdateData()
+        {
+            lv.ItemsSource = null;
+            lv.ItemsSource = AccessPointUtils.AvailableWifi;
+        }
+
+>>>>>>> Stashed changes
     }
 }

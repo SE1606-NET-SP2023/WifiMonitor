@@ -18,8 +18,12 @@ namespace WifiMonitor.ViewModels
 
             foreach (AvailableNetworkGroupPack network in networkList)
             {
+<<<<<<< Updated upstream
                 BssNetworkPack networkPack = network.BssNetworks.ToList()[0];
 
+=======
+                BssNetworkPack networkPack = network.BssNetworks.ToList().FirstOrDefault();
+>>>>>>> Stashed changes
                 wifiList.Add(new WifiInformation
                 {
                     SSID = networkPack.Ssid.ToString(),
