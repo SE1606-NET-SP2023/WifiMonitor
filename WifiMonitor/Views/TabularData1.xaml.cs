@@ -24,17 +24,17 @@ namespace WifiMonitor.Views
     {
         List<AccessPointSnapshot> data = new List<AccessPointSnapshot>();
         AccessPointUtils utils = new AccessPointUtils();
-        public TabularData1()
+        string TargetBSSID = "";
+        public TabularData1(string TargetBssid)
         {
             InitializeComponent();
-            data = AccessPointUtils.ScanHistory.Where(x=>x.BSSID.Equals("A4:85:7A:B8:77:60")).ToList();
-            lv.ItemsSource = data;
-            utils.OnScanSuccess += UpdateData;
+            this.TargetBSSID = TargetBssid;
+            AccessPointUtils.OnScanSuccess += UpdateData;
         }
         void UpdateData()
         {
-            data.Add(AccessPointUtils.ScanHistory.Where(x => x.BSSID.Equals("A4:85:7A:B8:77:60")).Last());
-            lv.Items.Refresh();
+            lv.ItemsSource = null;
+            lv.ItemsSource = AccessPointUtils.ScanHistory.Where(x => x.BSSID.Equals(TargetBSSID)).Reverse();
         }
     }
 }

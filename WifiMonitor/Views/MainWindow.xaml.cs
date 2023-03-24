@@ -7,6 +7,7 @@ using WifiMonitor.Models;
 using WifiMonitor.ViewModels;
 using WifiMonitor.Utils;
 using System.Windows.Threading;
+using WifiMonitor.Views;
 
 namespace WifiMonitor
 {
@@ -47,6 +48,17 @@ namespace WifiMonitor
         {
             //OnNotify.Invoke();
             utils.Scan();
+        }
+
+        private void lv_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            dynamic selectedItem = lv.SelectedItem;
+            string TargetBssid = selectedItem.BSSID;
+            Window container = new Window();
+            TabularData1 ta = new TabularData1(TargetBssid);
+            container.Title = selectedItem.SSID;
+            container.Content = ta;
+            container.Show();
         }
 
         void UpdateData()
