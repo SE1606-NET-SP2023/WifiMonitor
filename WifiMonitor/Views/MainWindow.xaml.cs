@@ -22,12 +22,14 @@ namespace WifiMonitor
         private Random random = new Random();
         AccessPointUtils utils = new AccessPointUtils();
         DispatcherTimer ScanTimer = new DispatcherTimer();
+        public static NetworkWatcher NetworkWatcherControl = new NetworkWatcher();
 
         public MainWindow()
         {
             InitializeComponent();
             lv.ItemsSource = AccessPointUtils.AvailableWifi;
             AccessPointUtils.OnScanSuccess += UpdateData;
+            NetworkWatcherContainer.Content = NetworkWatcherControl;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -41,6 +43,7 @@ namespace WifiMonitor
         {
             ComboBoxItem item = (ComboBoxItem)cbInterval.SelectedItem;
             int interval = Convert.ToInt32(item.Content.ToString().Replace(" seconds",""));
+            WifiVM.ScanInterval = interval;
             ScanTimer.Interval = new TimeSpan(0,0,interval);
         }
 

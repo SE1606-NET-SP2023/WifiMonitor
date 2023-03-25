@@ -56,6 +56,11 @@
                     </ComboBox>
                 </Grid>
             </TabItem>
+            <TabItem x:Name="NetworkWatcher" Header="Network Watcher" Width="Auto">
+                <Grid>
+                    <UserControl x:Name="NetworkWatcherContainer"/>
+                </Grid>
+            </TabItem>
         </TabControl>  
     </Grid>
 </Window>

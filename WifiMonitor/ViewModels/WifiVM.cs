@@ -7,6 +7,7 @@ namespace WifiMonitor.ViewModels
 {
     public class WifiVM
     {
+        public static int ScanInterval = 5;
         public static List<WifiInformation> GetAllAvailableWifi()
         {
             List<WifiInformation> wifiList = new List<WifiInformation>();
