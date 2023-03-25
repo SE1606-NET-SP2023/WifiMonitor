@@ -8,6 +8,8 @@ using WifiMonitor.ViewModels;
 using WifiMonitor.Utils;
 using System.Windows.Threading;
 using WifiMonitor.Views;
+using System.ComponentModel;
+using System.Reflection;
 
 namespace WifiMonitor
 {
@@ -49,14 +51,11 @@ namespace WifiMonitor
             //OnNotify.Invoke();
             utils.Scan();
         }
-
-        private void lv_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void BtnDetail_Click(object sender, RoutedEventArgs e)
         {
-            dynamic selectedItem = lv.SelectedItem;
-            string TargetBssid = selectedItem.BSSID;
             Window container = new Window();
-            TabularData1 ta = new TabularData1(TargetBssid);
-            container.Title = selectedItem.SSID;
+            TabularData1 ta = new TabularData1();
+
             container.Content = ta;
             container.Show();
         }
@@ -66,6 +65,5 @@ namespace WifiMonitor
             lv.ItemsSource = null;
             lv.ItemsSource = AccessPointUtils.AvailableWifi;
         }
-
     }
 }

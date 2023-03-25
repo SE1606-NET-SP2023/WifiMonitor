@@ -5,57 +5,54 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WifiMonitor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="922"
-        HorizontalAlignment="Stretch"
-        Loaded="Window_Loaded">
-    <Grid HorizontalAlignment="Stretch">
-        <TabControl>
-            <TabItem Header="Discover">
-                <Grid>
-                    <ListView x:Name="lv" d:ItemsSource="{d:SampleData ItemCount=1}" Margin="0,49,0,0" HorizontalAlignment="Stretch" MouseDoubleClick="lv_MouseDoubleClick">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Width="30" >
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <CheckBox>
-                                            </CheckBox>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn Header="SSID"  Width="200" DisplayMemberBinding="{Binding SSID}"/>
-                                <GridViewColumn Header="BSSID"  Width="150" DisplayMemberBinding="{Binding BSSID}"/>
-                                <GridViewColumn Header="Signal" Width="Auto" DisplayMemberBinding="{Binding Signal}"/>
-                                <GridViewColumn Header="%"  Width="Auto" DisplayMemberBinding="{Binding Percentage}"/>
-                                <GridViewColumn Header="Min."  Width="Auto" DisplayMemberBinding="{Binding Min}"/>
-                                <GridViewColumn Header="Max."  Width="Auto" DisplayMemberBinding="{Binding Max}"/>
-                                <GridViewColumn Header="Average"  Width="Auto" DisplayMemberBinding="{Binding Average}"/>
-                                <GridViewColumn Header="Level"  >
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <ProgressBar x:Name="TaskBar" Maximum="100" Value="50"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
+        Title="MainWindow" Height="450" Width="922" Loaded="Window_Loaded">
+    <Grid>
+        <ListView x:Name="lv" Margin="0,49,0,0" RenderTransformOrigin="0.506,0.533">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="30" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox Background="{Binding Color}">
+                                    <TextBlock  Text="{Binding BSSID }" Visibility="Hidden" />
+                                </CheckBox>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="SSID"  Width="200" DisplayMemberBinding="{Binding SSID}"/>
+                    <GridViewColumn Header="BSSID"  Width="150" DisplayMemberBinding="{Binding BSSID}"/>
+                    <GridViewColumn Header="Signal" Width="Auto" DisplayMemberBinding="{Binding Signal}"/>
+                    <GridViewColumn Header="%"  Width="Auto" DisplayMemberBinding="{Binding Percentage}"/>
+                    <GridViewColumn Header="Min."  Width="Auto" DisplayMemberBinding="{Binding Min}"/>
+                    <GridViewColumn Header="Max."  Width="Auto" DisplayMemberBinding="{Binding Max}"/>
+                    <GridViewColumn Header="Average"  Width="Auto" DisplayMemberBinding="{Binding Average}"/>
+                    <GridViewColumn Header="Level"  >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ProgressBar x:Name="TaskBar" Maximum="100" Value="50"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
 
-                                <GridViewColumn Header="Band"  Width="40" DisplayMemberBinding="{Binding Band}"/>
-                                <GridViewColumn Header="Channel"  Width="55" DisplayMemberBinding="{Binding Channel}"/>
-                                <GridViewColumn Header="Width"  Width="50" DisplayMemberBinding="{Binding Width}"/>
-                                <GridViewColumn Header="Security" DisplayMemberBinding="{Binding Security}"/>
-                                <GridViewColumn Header="Mode" Width="40" DisplayMemberBinding="{Binding Mode}"/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
 
-                    <ComboBox x:Name="cbInterval" SelectionChanged="cbInterval_OnChange"
+                    <GridViewColumn Header="Band"  Width="40" DisplayMemberBinding="{Binding Band}"/>
+                    <GridViewColumn Header="Channel"  Width="55" DisplayMemberBinding="{Binding Channel}"/>
+                    <GridViewColumn Header="Width"  Width="50" DisplayMemberBinding="{Binding Width}"/>
+                    <GridViewColumn Header="Security" DisplayMemberBinding="{Binding Security}"/>
+                    <GridViewColumn Header="Mode" Width="40" DisplayMemberBinding="{Binding Mode}"/>
+                </GridView>
+            </ListView.View>
+
+        </ListView>
+        <Button x:Name="BtnDetail" Content="Button" HorizontalAlignment="Left" Margin="95,4,0,0" VerticalAlignment="Top" Height="25" Width="75" RenderTransformOrigin="0.667,1.802" Click="BtnDetail_Click"/>
+
+        <ComboBox x:Name="cbInterval" SelectionChanged="cbInterval_OnChange"
                   HorizontalAlignment="Left" Margin="670,10,0,0" VerticalAlignment="Top" Width="120">
-                        <ComboBoxItem Content="5 seconds"  IsSelected="True"/>
-                        <ComboBoxItem Content="10 seconds"/>
-                        <ComboBoxItem Content="30 seconds"/>
-                        <ComboBoxItem Content="60 seconds"/>
-                    </ComboBox>
-                </Grid>
-            </TabItem>
-        </TabControl>  
+            <ComboBoxItem Content="5 seconds"  IsSelected="True"/>
+            <ComboBoxItem Content="10 seconds"/>
+            <ComboBoxItem Content="30 seconds"/>
+            <ComboBoxItem Content="60 seconds"/>
+        </ComboBox>
+
     </Grid>
 </Window>

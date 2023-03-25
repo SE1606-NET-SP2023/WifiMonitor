@@ -14,7 +14,7 @@ namespace WifiMonitor.ViewModels
 
             foreach (AvailableNetworkGroupPack network in networkList)
             {
-                BssNetworkPack networkPack = network.BssNetworks.ToList()[0];
+                BssNetworkPack networkPack = network.BssNetworks.ToList().FirstOrDefault();
                 wifiList.Add(new WifiInformation
                 {
                     SSID = networkPack.Ssid.ToString(),

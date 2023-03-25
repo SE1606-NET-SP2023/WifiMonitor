@@ -4,21 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WifiMonitor.Views"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <TabControl>
-            <TabItem Header="TabItem">
+            <TabItem Header="Chart">
                 <Grid Background="White">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0*"/>
-                        <ColumnDefinition Width="787*"/>
-                        <ColumnDefinition Width="7*"/>
-                    </Grid.ColumnDefinitions>
-
-
+                    <lvc:CartesianChart Name="WifiChart" Series="{Binding Series}"/>
                 </Grid>
             </TabItem>
+            
             <TabItem Header="TabItem" HorizontalAlignment="Center" Width="54" Height="20" VerticalAlignment="Top">
                 <Grid Background="White">
                     <Grid.ColumnDefinitions>
@@ -35,11 +31,7 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-
-
-
                 </Grid>
-
             </TabItem>
         </TabControl>
 
