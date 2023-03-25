@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WifiMonitor.ViewModels;
+using WifiMonitor.Utils;
 
 namespace WifiMonitor.Views
 {
@@ -23,8 +25,13 @@ namespace WifiMonitor.Views
         public NetworkWatcher()
         {
             InitializeComponent();
+            AccessPointUtils.OnScanSuccess += UpdateData;
         }
 
-
+        void UpdateData()
+        {
+            lvNetworkClient.ItemsSource = null;
+            lvNetworkClient.ItemsSource = NetworkWatcherVM.GetNetworkClients();
+        }
     }
 }

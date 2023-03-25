@@ -38,7 +38,7 @@ namespace WifiMonitor.Views
 
         List<AccessPointSnapshot> data = new List<AccessPointSnapshot>();
 
-        private string Signal { get; set; } = "0";
+        private string Signal { get; set; } = "-100";
         string TargetBSSID = "";
         public TabularData1(string TargetBssid)
         {
