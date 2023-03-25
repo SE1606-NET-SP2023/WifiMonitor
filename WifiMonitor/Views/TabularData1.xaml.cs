@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WifiMonitor.Utils;
 using WifiMonitor.Models;
 using LiveCharts;
@@ -24,6 +16,8 @@ using System.Threading;
 using LiveCharts.Helpers;
 using LiveCharts.Configurations;
 using WifiMonitor.ViewModels;
+using Microsoft.Win32;
+using ClosedXML.Excel;
 
 namespace WifiMonitor.Views
 {
@@ -93,6 +87,45 @@ namespace WifiMonitor.Views
             Signal = data.First().Signal;
         }
 
+        private void Export_Click(object sender, RoutedEventArgs e)
+        {
+            string path = string.Empty;
+            SaveFileDialog saveFileDialog = new SaveFileDialog()
+            {
+                Title = "File name",
+                DefaultExt = ".xlsx",
+                Filter = "Excel (.xlsx)|* .xlsx"
+            };
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                path = saveFileDialog.FileName;
+            }
+                
+            if (!string.IsNullOrEmpty(path))
+            {
+                bool exported = Export<AccessPointSnapshot>(data, path, "Data");
+                if (exported)
+                {
+                    MessageBox.Show("Exported success");
+                }
+                else
+                {
+                    MessageBox.Show("Can not export");
+                }
+            }
+        }
+
+        private bool Export<T>(List<T> list, string file, string sheetName)
+        {
+            bool export = false;
+            using (IXLWorkbook workbook = new XLWorkbook())
+            {
+                workbook.AddWorksheet(sheetName).FirstCell().InsertTable<T>(list, false);
+                workbook.SaveAs(file);
+                export = true;
+            }
+            return export;
+        }
     }
     public class MeasureModel
     {
